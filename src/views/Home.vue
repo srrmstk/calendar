@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <v-container>
+    <v-row>
+      <v-col class="ma-4 d-flex align-center flex-column">
+        <Calendar />
+        <v-btn @click="addTask">Добавить</v-btn>
+      </v-col>
+      <v-col>
+        <TaskList />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import Calendar from "@/components/Calendar.vue";
+import TaskList from "@/components/TaskList.vue";
 
 export default Vue.extend({
   name: "Home",
   components: {
-    HelloWorld,
+    TaskList,
+    Calendar,
+  },
+  mounted() {
+    this.$store.dispatch("fetchEvents");
+  },
+  methods: {
+    addTask() {
+      this.$router.push("/constructor");
+    },
   },
 });
 </script>
